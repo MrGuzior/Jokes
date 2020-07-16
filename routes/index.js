@@ -5,9 +5,8 @@ const fetch = require('node-fetch');
 const rootPath = 'https://sv443.net/jokeapi/v2/joke/';
 
 router.get('/', async (req, res, next) => {
-
-  const categories = [req.query.Programming, req.query.Miscellaneous]
-  const blackList = [req.query.nsfw, req.query.religious, req.query.political, req.query.racist, req.query.sexist]
+  const queryCategories = [req.query.Programming, req.query.Miscellaneous]
+  const queryBlackList = [req.query.nsfw, req.query.religious, req.query.political, req.query.racist, req.query.sexist]
   const searchString = req.query.string ? `&contains=${req.query.string}` : '';
 
   const getBlackList = (blackList) => {
@@ -32,16 +31,15 @@ router.get('/', async (req, res, next) => {
     }
   }
 
-  const categoryString = getCategories(categories);
+  const categoryString = getCategories(queryCategories);
 
-  const path = `${rootPath}${categoryString}?blacklistFlags=${getBlackList(blackList)}${searchString}`;
+  const path = `${rootPath}${categoryString}?blacklistFlags=${getBlackList(queryBlackList)}${searchString}`;
 
   const joke = await fetch(path)
     .then(data => data.json())
     .then(json => json);
 
   res.render('index', { joke: joke })
-
 });
 
 

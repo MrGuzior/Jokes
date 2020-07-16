@@ -1,40 +1,46 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  form(action="/", method="get")
-    label(for="Programming") Programming
-    input(type="checkbox", name="Programming" value="Programming" checked="true")
-    br
-    label(for="Miscellaneous") Miscellaneous
-    input(type="checkbox", name="Miscellaneous" value="Miscellaneous")
-    br
-    p Blacklist
-    label(for="nsfw") nsfw
-    input(type="checkbox", name="nsfw" value="nsfw")
-    br
-    label(for="religious") religious
-    input(type="checkbox", name="religious" value="religious" checked="true")
-    br
-    label(for="political") political
-    input(type="checkbox", name="political" value="political" checked="true")
-    br
-    label(for="racist") racist
-    input(type="checkbox", name="racist" value="racist" checked="true")
-    br
-    label(for="sexist") sexist
-    input(type="checkbox", name="sexist" value="sexist" checked="true")
-    br
-    label(for="string") Search for joke containing
-    input(type="text", name="string" placeholder="string")
-    br
-    input(type="submit", value="Submit")
-    
-  
-  #joke
-    if joke.type == 'single'
-      p #{joke.joke}
-    else
-      p #{joke.setup}
-      p #{joke.delivery}
+  div(class="main")
+    h1 Just joking...
+    form(action="/", method="get")
+      div(class="categories container")
+        h3 What type of jokes do you like?
+        h4 Categories
+        label(for="Programming") Programming
+        input(type="checkbox", name="Programming" value="Programming" checked="true")
+        br
+        label(for="Miscellaneous") Miscellaneous
+        input(type="checkbox", name="Miscellaneous" value="Miscellaneous")
+
+      div(class="blacklist-container container")
+        h3 What kind of jokes don't you like?
+        h4 Blacklist
+        label(for="nsfw") nsfw
+        input(type="checkbox", name="nsfw" value="nsfw")
+        br
+        label(for="religious") religious
+        input(type="checkbox", name="religious" value="religious" checked="true")
+        br
+        label(for="political") political
+        input(type="checkbox", name="political" value="political" checked="true")
+        br
+        label(for="racist") racist
+        input(type="checkbox", name="racist" value="racist" checked="true")
+        br
+        label(for="sexist") sexist
+        input(type="checkbox", name="sexist" value="sexist" checked="true")
+
+      div(class="search-container")
+        h4 Something in particular you want to joke about?
+        label(for="string") Search for joke containing...
+        input(type="text", name="string" placeholder="Something")
+      input(type="submit", value="Tell me a joke..." class="submit-button")
+      
+    div(class="joke-conntainer")
+    #joke
+      if joke.type == 'single'
+        p(class="joke") #{joke.joke}
+      else
+        p(class="joke question") #{joke.setup}
+        p(class="joke pun") #{joke.delivery}
