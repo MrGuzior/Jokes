@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form(action="/", method="get")
+    label(for="Programming") Programming
+    input(type="checkbox", name="Programming" value="Programming" checked="true")
+    br
+    label(for="Miscellaneous") Miscellaneous
+    input(type="checkbox", name="Miscellaneous" value="Miscellaneous")
+    br
+    p Blacklist
+    label(for="nsfw") nsfw
+    input(type="checkbox", name="nsfw" value="nsfw")
+    br
+    label(for="religious") religious
+    input(type="checkbox", name="religious" value="religious" checked="true")
+    br
+    label(for="political") political
+    input(type="checkbox", name="political" value="political" checked="true")
+    br
+    label(for="racist") racist
+    input(type="checkbox", name="racist" value="racist" checked="true")
+    br
+    label(for="sexist") sexist
+    input(type="checkbox", name="sexist" value="sexist" checked="true")
+    br
+    label(for="string") Search for joke containing
+    input(type="text", name="string" placeholder="string")
+    br
+    input(type="submit", value="Submit")
+    
+  
+  #joke
+    if joke.type == 'single'
+      p #{joke.joke}
+    else
+      p #{joke.setup}
+      p #{joke.delivery}
